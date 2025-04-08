@@ -177,4 +177,8 @@ exit 0
 #echo $(grep -i "swaptotal" /proc/meminfo | cut -d':' -f2 | grep -o '[^[:space:]].*[^[:space:]]' | cut -d' ' -f1) | awk '{printf "%20.2f MB\n", ($1/1024)}'
 #echo $(grep -i "swaptotal" /proc/meminfo | cut -d':' -f2 | grep -o '[^[:space:]].*[^[:space:]]' | cut -d' ' -f1) | awk '{printf "%20.2f GB\n", ($1/1024/1024)}'
 
+##### HINT: PANDOC
+# ./pandoc -s /tmp/distro.md -i -t slidy  -o /tmp/distro-slide.html
+# ./pandoc -s /tmp/distro.md -o /tmp/distro.html
+
 
