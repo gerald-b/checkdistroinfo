@@ -76,4 +76,26 @@ echo -e "\`\`\`" >> ${TMD}
 echo -e "</details>\n" >> ${TMD}
 
 
+## FSTYPE
+#lsblk -fo NAME,FSTYPE,UUID
+
+## CPU Model
+#grep -i "model name" /proc/cpuinfo | sort -u | cut -d':' -f2
+
+## Cores
+#grep -i "processor" /proc/cpuinfo | wc -l
+
+
+## Memory / Swap
+#echo -e "$(grep -i "memtotal" /proc/meminfo | cut -d':' -f2 | grep -o '[^[:space:]].*[^[:space:]]' | cut -d' ' -f1) KB"
+
+#echo -e "$(( $(grep -i "memtotal" /proc/meminfo | cut -d':' -f2 | grep -o '[^[:space:]].*[^[:space:]]' | cut -d' ' -f1) / 1024)) MB"
+
+#echo -e "$(grep -i "swaptotal" /proc/meminfo | cut -d':' -f2 | grep -o '[^[:space:]].*[^[:space:]]' | cut -d' ' -f1) KB"
+#echo $(grep -i "swaptotal" /proc/meminfo | cut -d':' -f2 | grep -o '[^[:space:]].*[^[:space:]]' | cut -d' ' -f1) | awk '{printf "%20.2f KB\n", ($1)}'
+#echo -e "$(( $(grep -i "swaptotal" /proc/meminfo | cut -d':' -f2 | grep -o '[^[:space:]].*[^[:space:]]' | cut -d' ' -f1) / 1024)) MB"
+#echo $(grep -i "swaptotal" /proc/meminfo | cut -d':' -f2 | grep -o '[^[:space:]].*[^[:space:]]' | cut -d' ' -f1) | awk '{printf "%20.2f MB\n", ($1/1024)}'
+#echo $(grep -i "swaptotal" /proc/meminfo | cut -d':' -f2 | grep -o '[^[:space:]].*[^[:space:]]' | cut -d' ' -f1) | awk '{printf "%20.2f GB\n", ($1/1024/1024)}'
+
+
 echo -e "# EOF" >> ${TMD}
