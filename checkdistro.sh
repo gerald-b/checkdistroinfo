@@ -81,6 +81,9 @@ listflatpak()
 {
 	if [ "$(whereis flatpak | grep -i /bin/flatpak | wc -l)" -eq "1" ]; then
 		echo -e "## Flatpak installed packages" >> ${TMD}
+        echo -e "|Name|Anwendungskennung|Version|Zweig|Ursprung|Installation|" >> ${TMD}
+        echo -e "| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |" >> ${TMD}
+		flatpak list | sed 's/./|&/' | sed 's/\t/|/g' | sed 's/$/|/' >> ${TMD}
 	fi
 }
 
