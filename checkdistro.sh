@@ -1,10 +1,14 @@
 #!/bin/bash
 
 TMD=/tmp/distro.md
+AUTHOR="Gerald Büchler"
 
 main()
 {
-	echo -e "# DISTRO Information (Hostname: $(uname -n))" > ${TMD}
+    touch ${TMD}
+    rm ${TMD}
+    pandoc_head
+    echo -e "# DISTRO Information (Hostname: $(uname -n))" >> ${TMD}
 	kernelinfo
 	lsbinfo
 	packageinfo
@@ -15,6 +19,18 @@ main()
     filesystem_info
     cpuinfo
 	echo -e "# EOF" >> ${TMD}
+}
+
+pandoc_head()
+{
+    echo -e "---" >> ${TMD}
+    echo -e "title: DISTRO Information" >> ${TMD}
+    echo -e "author: ${AUTHOR}" >> ${TMD}
+    # Dateformat: ISO 8601
+    echo -e "date: $(date '+%Y-%m-%d %H:%M:%S.%3N')" >> ${TMD}
+    echo -e "lang: en" >> ${TMD}
+    echo -e "maxwidth: 80%" >> ${TMD}
+    echo -e "---" >> ${TMD}
 }
 
 kernelinfo()
