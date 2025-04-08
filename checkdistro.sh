@@ -36,7 +36,7 @@ echo -ne "| pipewire |" >> ${TMD}
 if [ "$(whereis pipewire | grep -i /bin/pipewire | wc -l)" -eq "1" ]; then
 	echo -ne "**installed**" >> ${TMD}
 else
-	echo -ne "míssing" >> ${TMD}
+	echo -ne "missing" >> ${TMD}
 fi
 echo -e "|" >> ${TMD}
 
@@ -44,7 +44,7 @@ echo -ne "| flatpak |" >> ${TMD}
 if [ "$(whereis flatpak | grep -i /bin/flatpak | wc -l)" -eq "1" ]; then
 	echo -ne "**installed**" >> ${TMD}
 else
-	echo -ne "míssing" >> ${TMD}
+	echo -ne "missing" >> ${TMD}
 fi
 echo -e "|" >> ${TMD}
 
@@ -52,7 +52,7 @@ echo -ne "| snap |" >> ${TMD}
 if [ "$(whereis snap | grep -i /bin/snap | wc -l)" -eq "1" ]; then
 	echo -ne "**installed**" >> ${TMD}
 else
-	echo -ne "míssing" >> ${TMD}
+	echo -ne "missing" >> ${TMD}
 fi
 echo -e "|" >> ${TMD}
 
