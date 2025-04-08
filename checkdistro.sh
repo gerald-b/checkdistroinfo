@@ -4,7 +4,7 @@ TMD=/tmp/distro.md
 
 main()
 {
-	echo -e "# DISTRO Information" > ${TMD}
+	echo -e "# DISTRO Information (Hostname: $(uname -n))" > ${TMD}
 	kernelinfo
 	lsbinfo
 	packageinfo
