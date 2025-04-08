@@ -44,9 +44,11 @@ packageinfo()
 		echo -e "\`\`\`" >> ${TMD}
 	fi
 
+    ### TODO
 	# arch / pacman
 	# pacman -Qq | wc -l
 	
+    ### TODO
 	# Fedora
 	# dnf list installed | wc -l
 }
@@ -147,16 +149,6 @@ exit 0
 
 
 ##### TODO
-
-## FSTYPE
-#lsblk -fo NAME,FSTYPE,UUID
-
-## CPU Model
-#grep -i "model name" /proc/cpuinfo | sort -u | cut -d':' -f2
-
-## Cores
-#grep -i "processor" /proc/cpuinfo | wc -l
-
 
 ## Memory / Swap
 #echo -e "$(grep -i "memtotal" /proc/meminfo | cut -d':' -f2 | grep -o '[^[:space:]].*[^[:space:]]' | cut -d' ' -f1) KB"
