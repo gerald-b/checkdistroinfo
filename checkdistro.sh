@@ -104,7 +104,7 @@ enviroment_vars()
 	echo -e "  <summary>Show full enviroment variable list</summary>" >> ${TMD}
 	echo -ne "\n" >> ${TMD}
 	echo -e "\`\`\`" >> ${TMD}
-	printenv >> ${TMD}
+	printenv | sort >> ${TMD}
 	echo -e "\`\`\`" >> ${TMD}
 	echo -e "</details>\n" >> ${TMD}
 }
