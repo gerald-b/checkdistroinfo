@@ -12,6 +12,7 @@ main()
 	listflatpak
 	listsnap
 	enviroment_vars
+    filesystem_info
 	echo -e "# EOF" >> ${TMD}
 }
 
@@ -107,6 +108,18 @@ enviroment_vars()
 	printenv | sort >> ${TMD}
 	echo -e "\`\`\`" >> ${TMD}
 	echo -e "</details>\n" >> ${TMD}
+}
+
+filesystem_info()
+{
+    echo -e "## Blockdevice and Diskspace Information" >> ${TMD}
+    echo -e "\`\`\`" >> ${TMD}
+    lsblk -fo NAME,FSTYPE,UUID >> ${TMD}
+    echo -e "\`\`\`" >> ${TMD}
+
+    echo -e "\`\`\`" >> ${TMD}
+    df -h | grep -v tmpfs >> ${TMD}
+    echo -e "\`\`\`" >> ${TMD}
 }
 
 main
