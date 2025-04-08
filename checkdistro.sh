@@ -77,6 +77,10 @@ programminfo()
 	
 	search4pgm=pipewire
 	programmdetails
+	search4pgm=curl
+	programmdetails
+	search4pgm=wget
+	programmdetails
 	search4pgm=flatpak
 	programmdetails
 	search4pgm=snap
