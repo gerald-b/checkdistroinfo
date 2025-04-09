@@ -2,6 +2,7 @@
 
 TMD=/tmp/distro.md
 AUTHOR="Gerald Büchler"
+PANDOC=YeS
 
 main()
 {
@@ -18,6 +19,9 @@ main()
 	enviroment_vars
     filesystem_info
     cpuinfo
+
+    pandoc_pre
+    pandoc_export
 	echo -e "# EOF" >> ${TMD}
 }
 
@@ -161,6 +165,60 @@ cpuinfo()
     echo -ne "Architecture:\t" >> ${TMD}
     uname -p>> ${TMD}
     echo -e "\`\`\`" >> ${TMD}
+}
+
+
+pandoc_pre()
+{
+    if [ -f ${PWD}/pandoc ]; then
+        rm -rf ${PWD}/pandoc
+    fi
+
+    if [ "$(echo ${PANDOC} | tr '[:upper:]' '[:lower:]')" == "yes" ]; then
+        # download with curl or wget
+        if [ "$(whereis curl | grep -i /bin/curl | wc -l)" -eq "1" ]; then
+            DOWNLOAD_URL=$(curl -s https://api.github.com/repos/jgm/pandoc/releases/latest \
+                | grep browser_download_url \
+                | grep linux-amd64.tar.gz \
+                | cut -d '"' -f 4)
+            #echo -e ${DOWNLOAD_URL}
+            PANDOC_VER=$(curl -s https://api.github.com/repos/jgm/pandoc/releases/latest \
+                | grep tag_name \
+                | cut -d '"' -f 4)
+            #echo -e ${PANDOC_VER}
+            curl -s -L -o ${PWD}/pandoc.tar.gz "${DOWNLOAD_URL}"
+        else
+            if [ "$(whereis curl | grep -i /bin/curl | wc -l)" -eq "1" ]; then
+                DOWNLOAD_URL=$(wget --quiet -O /dev/stdout https://api.github.com/repos/jgm/pandoc/releases/latest \
+                    | grep browser_download_url \
+                    | grep linux-amd64.tar.gz \
+                    | cut -d '"' -f 4)
+                #echo -e ${DOWNLOAD_URL}
+                PANDOC_VER=$(wget --quiet -O /dev/stdout https://api.github.com/repos/jgm/pandoc/releases/latest \
+                    | grep tag_name \
+                    | cut -d '"' -f 4)
+                #echo -e ${PANDOC_VER}
+                wget --quiet -O ${PWD}/pandoc.tar.gz "${DOWNLOAD_URL}"
+            else
+                exit 1
+            fi
+        fi
+        # unpack and make it executable
+        if [ -f ${PWD}/pandoc.tar.gz ]; then
+            tar -xzf ${PWD}/pandoc.tar.gz
+            mv ${PWD}/pandoc-${PANDOC_VER}/bin/pandoc ${PWD}/pandoc
+            chmod a+x ${PWD}/pandoc
+            rm -rf ${PWD}/pandoc.tar.gz
+            rm -rf ${PWD}/pandoc-${PANDOC_VER}
+        else
+            exit 1
+        fi
+    fi
+}
+
+pandoc_export()
+{
+    echo -e "PANDOC EXPORT" > /dev/null
 }
 
 main
