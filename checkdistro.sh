@@ -60,7 +60,7 @@ packageinfo()
 		echo -e "\`\`\`" >> ${TMD}
 		echo -e "Packagemanager:\tapt" >> ${TMD}
 		echo -ne "Packagecount:\t" >> ${TMD}
-		apt list --installed | wc -l 2>/dev/null >> ${TMD}
+		apt list --installed 2>/dev/null | wc -l >> ${TMD}
 		echo -e "\`\`\`" >> ${TMD}
 	fi
 
