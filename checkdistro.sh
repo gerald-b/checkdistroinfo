@@ -48,9 +48,9 @@ kernelinfo()
 lsbinfo()
 {
 	echo -e "## LSB Release info" >> ${TMD}
-	echo -e "\`\`\`" >> ${TMD}
-	lsb_release -a 2>/dev/null >> ${TMD}
-	echo -e "\`\`\`" >> ${TMD}
+    echo -e "|Description|Value|" >> ${TMD}
+    echo -e "|-------------|-------------|" >> ${TMD}
+    lsb_release -a 2>/dev/null | sed -e 's/:\t/|/g' -e 's/^/|/' -e 's/$/|/' >> ${TMD}
 }
 
 packageinfo()
