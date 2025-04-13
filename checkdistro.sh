@@ -155,16 +155,16 @@ filesystem_info()
 cpuinfo()
 {
     echo -e "## CPU Information" >> ${TMD}
-    echo -e "\`\`\`" >> ${TMD}
-    echo -ne "Model:\t\t" >> ${TMD}
-    grep -i "model name" /proc/cpuinfo | sort -u | cut -d':' -f2 | grep -o '[^[:space:]].*[^[:space:]]' >> ${TMD}
-    echo -ne "Cores:\t\t" >> ${TMD}
-    grep -i "cpu cores" /proc/cpuinfo | sort -u | cut -d':' -f2 | cut -d' ' -f2 >> ${TMD}
-    echo -ne "Threads:\t" >> ${TMD}
-    grep -i "processor" /proc/cpuinfo | wc -l >> ${TMD}
-    echo -ne "Architecture:\t" >> ${TMD}
-    uname -p>> ${TMD}
-    echo -e "\`\`\`" >> ${TMD}
+    echo -e "|Description\t| Value|" >> ${TMD}
+    echo -e "|---------------|---------------|" >> ${TMD}
+    echo -ne "|Model\t\t\t| " >> ${TMD}
+    grep -i "model name" /proc/cpuinfo | sort -u | cut -d':' -f2 | grep -o '[^[:space:]].*[^[:space:]]' | sed 's/$/|/' >> ${TMD}
+    echo -ne "|Cores\t\t\t| " >> ${TMD}
+    grep -i "cpu cores" /proc/cpuinfo | sort -u | cut -d':' -f2 | cut -d' ' -f2 | sed 's/$/|/' >> ${TMD}
+    echo -ne "|Threads\t\t| " >> ${TMD}
+    grep -i "processor" /proc/cpuinfo | wc -l | sed 's/$/|/' >> ${TMD}
+    echo -ne "|Architecture\t| " >> ${TMD}
+    uname -p | sed 's/$/|/' >> ${TMD}
 }
 
 
