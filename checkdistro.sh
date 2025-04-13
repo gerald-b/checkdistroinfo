@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TMD=/tmp/distro.md
+TMD=${PWD}/distro.md
 AUTHOR="Gerald Büchler"
 PANDOC=YeS
 
@@ -242,5 +242,6 @@ exit 0
 ##### HINT: PANDOC
 # ./pandoc -s /tmp/distro.md -i -t slidy  -o /tmp/distro-slide.html
 # ./pandoc -s /tmp/distro.md -o /tmp/distro.html
+# ./pandoc -o distro.html -s ./distro.md  --include-in-header=https://raw.githubusercontent.com/gerald-b/checkdistroinfo/refs/heads/main/pandoc.css
 
 
