@@ -19,6 +19,7 @@ main()
     enviroment_vars
     filesystem_info
     cpuinfo
+    meminfo
 
     pandoc_pre
     pandoc_export
@@ -167,6 +168,30 @@ cpuinfo()
     uname -p | sed 's/$/|/' >> ${TMD}
 }
 
+meminfo()
+{
+    echo -e "## Memory (RAM) &amp; SWAP Information" >> ${TMD}
+    echo -e "|Information    | Size (KB)      | Size (MB)      | Size (GB)      |" >> ${TMD}
+    echo -e "|---------------|---------------:|---------------:|---------------:|" >> ${TMD}
+    echo -ne "|Memory Total\t|" >> ${TMD}
+    grep -i "memtotal" /proc/meminfo | cut -d':' -f2 | grep -o '[^[:space:]].*[^[:space:]]' | cut -d' ' -f1 | awk '{printf "%13.2f KB|", ($1)}' >> ${TMD}
+    grep -i "memtotal" /proc/meminfo | cut -d':' -f2 | grep -o '[^[:space:]].*[^[:space:]]' | cut -d' ' -f1 | awk '{printf "%13.2f MB|", ($1/1024)}' >> ${TMD}
+    grep -i "memtotal" /proc/meminfo | cut -d':' -f2 | grep -o '[^[:space:]].*[^[:space:]]' | cut -d' ' -f1 | awk '{printf "%13.2f GB|", ($1/1024/1024)}' >> ${TMD}
+    echo -ne "\n" >> ${TMD}
+    echo -ne "|Memory Free\t|" >> ${TMD}
+    grep -i "memfree" /proc/meminfo | cut -d':' -f2 | grep -o '[^[:space:]].*[^[:space:]]' | cut -d' ' -f1 | awk '{printf "%13.2f KB|", ($1)}' >> ${TMD}
+    grep -i "memfree" /proc/meminfo | cut -d':' -f2 | grep -o '[^[:space:]].*[^[:space:]]' | cut -d' ' -f1 | awk '{printf "%13.2f MB|", ($1/1024)}' >> ${TMD}
+    grep -i "memfree" /proc/meminfo | cut -d':' -f2 | grep -o '[^[:space:]].*[^[:space:]]' | cut -d' ' -f1 | awk '{printf "%13.2f GB|", ($1/1024/1024)}' >> ${TMD}
+    echo -ne "\n" >> ${TMD}
+echo -ne "|Swap Total\t\t|" >> ${TMD}
+    grep -i "swaptotal" /proc/meminfo | cut -d':' -f2 | grep -o '[^[:space:]].*[^[:space:]]' | cut -d' ' -f1 | awk '{printf "%13.2f KB|", ($1)}' >> ${TMD}
+    grep -i "swaptotal" /proc/meminfo | cut -d':' -f2 | grep -o '[^[:space:]].*[^[:space:]]' | cut -d' ' -f1 | awk '{printf "%13.2f MB|", ($1/1024)}' >> ${TMD}
+    grep -i "swaptotal" /proc/meminfo | cut -d':' -f2 | grep -o '[^[:space:]].*[^[:space:]]' | cut -d' ' -f1 | awk '{printf "%13.2f GB|", ($1/1024/1024)}' >> ${TMD}
+    echo -ne "\n" >> ${TMD}
+echo -ne "|Swap Free\t\t|" >> ${TMD}
+    grep -i "swapfree" /proc/meminfo | cut -d':' -f2 | grep -o '[^[:space:]].*[^[:space:]]' | cut -d' ' -f1 | awk '{printf "%13.2f KB|%13.2f MB|%13.2f GB|", ($1), ($1/1024), ($1/1024/1024)}' >> ${TMD}
+    echo -ne "\n" >> ${TMD}
+}
 
 pandoc_pre()
 {
