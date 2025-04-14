@@ -1,2 +1,7 @@
 # ignore ALL pandoc files
 pandoc*
+!pandoc.css
+*.md
+*.html
+!README.md
+!readme.md
