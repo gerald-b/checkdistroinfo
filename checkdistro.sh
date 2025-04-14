@@ -3,6 +3,7 @@
 TMD=${PWD}/distro.md
 AUTHOR="Gerald Büchler"
 PANDOC=YeS
+THTML=${PWD}/distro.html
 
 main()
 {
@@ -243,7 +244,7 @@ pandoc_pre()
 
 pandoc_export()
 {
-    echo -e "PANDOC EXPORT" > /dev/null
+    ${PWD}/pandoc -o ${THTML} -s ${TMD}
 }
 
 main
