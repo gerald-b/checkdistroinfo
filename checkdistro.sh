@@ -214,7 +214,7 @@ pandoc_pre()
             #echo -e ${PANDOC_VER}
             curl -s -L -o ${PWD}/pandoc.tar.gz "${DOWNLOAD_URL}"
         else
-            if [ "$(whereis curl | grep -i /bin/curl | wc -l)" -eq "1" ]; then
+            if [ "$(whereis wget | grep -i /bin/wget | wc -l)" -eq "1" ]; then
                 DOWNLOAD_URL=$(wget --quiet -O /dev/stdout https://api.github.com/repos/jgm/pandoc/releases/latest \
                     | grep browser_download_url \
                     | grep linux-amd64.tar.gz \
