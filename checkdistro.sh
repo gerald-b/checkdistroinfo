@@ -166,7 +166,7 @@ cpuinfo()
     echo -ne "|Threads\t\t| " >> ${TMD}
     grep -i "processor" /proc/cpuinfo | wc -l | sed 's/$/|/' >> ${TMD}
     echo -ne "|Architecture\t| " >> ${TMD}
-    uname -p | sed 's/$/|/' >> ${TMD}
+    uname -m | sed 's/$/|/' >> ${TMD}
 }
 
 meminfo()
